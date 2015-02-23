@@ -55,7 +55,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 		assert capacity >= this.size;
 		Item[] aux = (Item[]) new Object[capacity];
 		for(int i=0; i<this.size; i++) {
-			aux[i] = this.array[1];
+			aux[i] = this.array[i];
 		}
 		this.array = aux;
 	}
