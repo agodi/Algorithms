@@ -37,6 +37,7 @@ public class QuickSort {
             }
 			System.out.println(Arrays.toString(array));
 		}
+        i--;
 		array[index] = array[i];
 		array[i] = pivot;
 		System.out.println(Arrays.toString(array));
