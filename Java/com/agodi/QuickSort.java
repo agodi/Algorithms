@@ -1,7 +1,6 @@
 package com.agodi;
 
 import java.util.Arrays;
-import java.util.Random;
 
 public class QuickSort {
 
@@ -20,16 +19,22 @@ public class QuickSort {
 
 	private static int partition(int[] array, int i, int j) {
 		System.out.println(Arrays.toString(array));
-		int index = new Random().nextInt(j-i) + i;
+		int index = i;//new Random().nextInt(j-i) + i;
 		int pivot = array[index];
         System.out.println(pivot);
 		array[index] = array[i];
 		index = i;
 		array[i] = pivot;
         System.out.println(Arrays.toString(array));
+        i++;
+        j--;
 		while(i < j) {
-			while(array[++i] < pivot && i < array.length) {System.out.println(array[i]);}
-			while(array[--j] > pivot && j >=0) {System.out.println(array[j]);}
+			while(i < array.length && array[i] < pivot) {
+                System.out.println(array[i]);
+                i++;}
+			while(j >=0 && array[j] > pivot) {
+                System.out.println(array[j]);
+                j--;}
             if(i<j) {
                 int aux = array[i];
                 array[i] = array[j];
