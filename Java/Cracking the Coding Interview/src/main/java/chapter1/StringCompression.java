@@ -1,7 +1,10 @@
+package chapter1;
+
 /**
  * Class to compress a String
- * @author agomdia
- **/
+ * @author Arturo
+ *
+ */
 public class StringCompression {
 
     /**
@@ -9,11 +12,11 @@ public class StringCompression {
      * equal characters are together.
      * Appends the character and its count
      * to form the compressed string
-     * 
+     *
      * @param string to compress
      * @return compressed string or original
-     * input if the length of the compressed 
-     * string is larger than the original or it 
+     * input if the length of the compressed
+     * string is larger than the original or it
      * is null or empty
      */
     public static String compress(String input) {
@@ -38,7 +41,7 @@ public class StringCompression {
         }
         return input.length() <= sb.length()? input : sb.toString();
     }
-    
+
     public static void main (String[] args) {
         String str = "aabcccccaaa";
         System.out.println(compress(str));

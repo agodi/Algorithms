@@ -1,4 +1,4 @@
-package com.agodi;
+package chapter1;
 
 import java.util.HashMap;
 import java.util.Map;
