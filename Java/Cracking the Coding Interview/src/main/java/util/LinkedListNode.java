@@ -11,6 +11,7 @@ public class LinkedListNode<T> {
 	
 	public LinkedListNode<T> next;
 	public T data;
+	private int size;
 	
 	/**
 	 * Constructor to initialize a node
@@ -18,6 +19,7 @@ public class LinkedListNode<T> {
 	 */
 	public LinkedListNode(T data) {
 		this.data = data;
+		this.size = 1;
 	}
 	
 	/**
@@ -32,6 +34,7 @@ public class LinkedListNode<T> {
 			node = node.next;
 		}
 		node.next = new LinkedListNode<T>(t);
+		this.size++;
 	}
 	
 	/**
@@ -45,6 +48,15 @@ public class LinkedListNode<T> {
 			current = current.next;
 		}
 		current.next = node;
+		this.size++;
+	}
+	
+	/**
+	 * Returns the size of this list
+	 * @return number of nodes in the list
+	 */
+	public int size() {
+		return this.size;
 	}
 	
 	/**
