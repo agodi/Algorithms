@@ -22,9 +22,9 @@ public class LinkedListNode<T> {
 	
 	/**
 	 * Iterates through the node, starting at this node,
-	 * and insert a new node with the given data
+	 * and inserts a new node with the given data
 	 * at the end
-	 * @param t
+	 * @param data to be contained in the new node
 	 */
 	public void add(T t) {
 		LinkedListNode<T> node = this;
@@ -32,6 +32,19 @@ public class LinkedListNode<T> {
 			node = node.next;
 		}
 		node.next = new LinkedListNode<T>(t);
+	}
+	
+	/**
+	 * Iterates through the list, starting at this node,
+	 * and inserts the given node at the end
+	 * @param the node to insert
+	 */
+	public void add(LinkedListNode<T> node) {
+		LinkedListNode<T> current = this;
+		while (current.next != null) {
+			current = current.next;
+		}
+		current.next = node;
 	}
 	
 	/**
