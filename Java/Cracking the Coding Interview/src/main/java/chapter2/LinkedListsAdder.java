@@ -9,7 +9,7 @@ import util.LinkedListNode;
  * @author Arturo
  *
  */
-public class ListsAdder {
+public class LinkedListsAdder {
 
 	/**
 	 * Sums the digits contained in two lists in
@@ -22,6 +22,13 @@ public class ListsAdder {
 		LinkedListNode<Integer> max = list1.size() >= list2.size() ? list1 : list2;
 		LinkedListNode<Integer> min = (max == list2) ? list1 : list2;
 		LinkedListNode<Integer> aux = max;
+		int delta = max.size() - min.size();
+		
+		while(delta != 0) {
+			aux = aux.next;
+			delta--;
+		}
+		
 		while(min != null) {
 			aux.data += min.data;
 			aux = aux.next;
@@ -30,31 +37,14 @@ public class ListsAdder {
 		return max;
 	}
 
-	/**
-	 * Gets the int represented in the list
-	 * @param head node of the list
-	 * @return int
-	 */
-	public static int getNumber(LinkedListNode<Integer> node) {
-		int num = 0;
-		int multiplier = 1;
-		while (node != null) {
-			num += node.data * multiplier;
-			multiplier *= 10;
-			node = node.next;
-		}
-		return num;
-	}
-
 	public static void main(String[] args) {
-		LinkedListNode<Integer> list1 = new LinkedListNode<Integer>(0);
-		list1.add(1);
+		LinkedListNode<Integer> list1 = new LinkedListNode<Integer>(1);
 		list1.add(2);
 		list1.add(3);
 		list1.add(4);
-		LinkedListNode<Integer> list2 = new LinkedListNode<Integer>(0);
+		LinkedListNode<Integer> list2 = new LinkedListNode<Integer>(1);
 		list2.add(1);
-		list2.add(2);
+		list2.add(1);
 		System.out.println(sum(list1, list2));
 	}
 
