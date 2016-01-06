@@ -20,37 +20,24 @@ def bfs_visited(ugraph, start_node):
         for node in ugraph[aux]:
             if node not in visited:
                 visited.add(node)
-                queue.append(node) 
+                queue.append(node)
     return visited
 
 
 def cc_visited(ugraph):
-    """ Takes the undirected graph ugraph 
-        and returns a list of sets, where 
-        each set consists of all the nodes 
-        in a connected component, and there 
-        is exactly one set in the list for 
-        each connected component in ugraph
-    """
-    r_nodes = set(ugraph.keys())
+    r_nodes = ugraph.keys()
     conected_components = []
     while len(r_nodes) > 0:
-        node = r_nodes.pop()
+        node = r_nodes[random.randrange(len(r_nodes))]
         v_nodes = bfs_visited(ugraph, node)
         conected_components.append(v_nodes)
-        for v_node in v_nodes:
-            if v_node in r_nodes:
-                r_nodes.remove(v_node)
+        for node in v_nodes:
+            r_nodes.remove(node)
     return conected_components
 
 
 def largest_cc_size(ugraph):
-    """ Takes the undirected graph ugraph 
-        and returns the size (an integer) 
-        of the largest connected component 
-        in ugraph
-    """
-    max_size = 0
+    max_size = None
     conected_components = cc_visited(ugraph)
     for comp in conected_components:
         if not max_size or max_size < len(comp):
@@ -59,20 +46,4 @@ def largest_cc_size(ugraph):
 
 
 def compute_resilience(ugraph, attack_order):
-    """ Takes the undirected graph ugraph, a 
-        list of nodes attack_order and iterates 
-        through the nodes in attack_order. 
-        For each node in the list, the function 
-        removes the given node and its edges from 
-        the graph and then computes the size of 
-        the largest connected component for the 
-        resulting graph.
-    """
-    resilience_list = [largest_cc_size(ugraph)]
-    for node in attack_order:
-        ugraph.pop(node)
-        for key in ugraph:
-            if node in ugraph[key]:
-                ugraph[key].remove(node)
-        resilience_list.append(largest_cc_size(ugraph))
-    return resilience_list
+    pass
