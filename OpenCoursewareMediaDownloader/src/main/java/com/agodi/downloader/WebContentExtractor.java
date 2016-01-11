@@ -30,7 +30,9 @@ public class WebContentExtractor {
 	 * @throws IOException
 	 *             if there was an error connecting and retrieving the URLs
 	 */
-	public static List<String> extractLecturesUrls(Document coursePage) throws IOException {
+	public static List<String> extractLecturesUrls(Document courseURL) throws IOException {
+	    Document coursePage = Jsoup.connect(courseURL).get();
+			
 		Element lecturesLink = coursePage.getElementsContainingOwnText("Lecture Videos").first();
 
 		Document lecturesPage = Jsoup.connect(lecturesLink.absUrl("href")).get();
@@ -42,6 +44,7 @@ public class WebContentExtractor {
 			String url = lecture.child(0).absUrl("href");
 
 			urls.add(url);
+			break;
 		}
 
 		return urls;
@@ -150,10 +153,12 @@ public class WebContentExtractor {
 
 	/**
 	 * Gets the name of the course
-	 * @param coursePage DOM of the course's web page
+	 * @param courseURL DOM of the course's web page
 	 * @return the name of the course
+	 * @throws IOException if there is an error connecting to the courseURL
 	 */
-	public static String getCourseName(Document coursePage) {
+	public static String getCourseName(String courseURL) throws IOException {
+	    Document coursePage = Jsoup.connect(courseURL).get();
 		Elements elements = coursePage.getElementsByClass("title");
 		return elements.first().ownText();
 	}

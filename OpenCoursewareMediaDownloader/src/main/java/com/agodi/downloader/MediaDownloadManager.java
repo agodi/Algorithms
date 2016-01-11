@@ -13,21 +13,36 @@ public class MediaDownloadManager {
 	public static List<Lecture> downloadCourseLectures(String courseURL, String parentDirectory) {
 		List<Lecture> lectures = null;
 		try {
-			Document coursePage = Jsoup.connect(courseURL).get();
-			String courseName = WebContentExtractor.getCourseName(coursePage);
-			List<String> urls = WebContentExtractor.extractLecturesUrls(coursePage);
+		    
+			String courseName = WebContentExtractor.getCourseName(courseURL);
+			List<String> urls = WebContentExtractor.extractLecturesUrls(courseURL);
 			lectures = WebContentExtractor.getLecturesFromUrls(urls);
-			WebContentExtractor.downloadLecturesVideos(lectures, parentDirectory, courseName);
+			
+			String parentFolderName = new StringBuilder(parentDirectory)
+			                                .append(courseName)
+			                                .append(File.separator)
+			                                .toString();
+
+		    File parentFolder = new File(parentFolderName);
+		    if (!parentFolder.exists()) {
+			    parentFolder.mkdir();
+		    }
+
+		    for (Lecture lecture : lectures) {
+			    WebContentExtractor.downloadVideo(parentFolderName, lecture);
+		    }
+		
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 		return lectures;
 	}
 
 	public static void main(String args[]) {
 		downloadCourseLectures(
 				"http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/",
-				"C:\\Users\\Arturo\\Downloads");
+				"/home/agodi/");
 	}
 
 }
